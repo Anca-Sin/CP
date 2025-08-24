@@ -1,10 +1,13 @@
-*.swp
-package-lock.json
-__pycache__
-.pytest_cache
-.venv
-*.egg-info
+*.swp                   # Vim editor temporary/swap files
+package-lock.json       # Node.js exact dependency versions (regenerated from package.json)
+__pycache__             # Python bytecode cache directories
+.pytest_cache           # Pytest testing framework cache directory
+.venv                   # Python virtual environment folder
+*.egg-info              # Python package build metadata directories
+*.pyc                   # Python compiled bytecode files
+.env                    # Environment variables file (contains secrets/API keys)
+.idea/                  # PyCharm IDE project settings folder
 
 # CDK asset staging directory
-.cdk.staging
-cdk.out
+.cdk.staging            # CDK temporary build files before deployment
+cdk.out                 # CDK synthesized CloudFormation templates output
