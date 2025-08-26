@@ -71,9 +71,9 @@ class RanjdarGroupWebsite(Construct):
         # Make class inherit all Construct features
         super().__init__(scope, id, **kwargs)
 
-        # =================================
-        #     STEP 1: Create S3 Bucket
-        # =================================
+        # ========================
+        # STEP 1: Create S3 Bucket
+        # ========================
         self.bucket = s3.Bucket(
             # f"{business_unit}-website-bucket" = the CDK ID for this bucket
             self, f"{business_unit}-website-bucket",
@@ -101,4 +101,32 @@ class RanjdarGroupWebsite(Construct):
             # auto_delete_objects=True means del all files in the bucket when destroying
             # Without this CDK can't delete non-empty buckets
             auto_delete_objects=True # For dev only
+        )
+
+        # =============================================
+        # STEP 2: Create CLOUD FRONT DISTRIBUTION (CDN)
+        # =============================================
+        # CloudFront = Content Delivery Network
+        #
+        # - copies my website to multiple locations worldwide
+        # - users get files from nearest location = fast
+        # - provide HTTPS (secure connection) for free
+        # - protects against DDoS attacks
+
+        self.distribution = cloudfront.Distribution(
+            # CDK ID for this distribution
+            self, f"{business_unit}-distribution",
+
+            # DEFAULT BEHAVIOR
+            # "Behavior" = Rules for how CloudFront handles requests
+            # "Default" = Rules for all requests (unless I add specific paths)
+            default_behavior=cloudfront.BehaviorOptions(
+                # ORIGIN = where CloudFront gets the files
+                # S3Origin = get files from an S3 bucket
+                origin=origins.S3Origin(self.bucket) # Tells CloudFront to get files from my bucket above
+            ),
+
+            # COMMENT = Description in my AWS Console
+            # helps me identify this distribution later
+            comment=f"CDN for {business_unit} business unit"
         )
