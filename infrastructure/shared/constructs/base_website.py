@@ -128,5 +128,8 @@ class RanjdarGroupWebsite(Construct):
 
             # COMMENT = Description in my AWS Console
             # helps me identify this distribution later
-            comment=f"CDN for {business_unit} business unit"
+            comment=f"CDN for {business_unit} business unit",
+
+            # Hardcode the PriceClass since my initial deployment is in EU only (and the foreseeable future)
+            price_class=cloudfront.PriceClass.PRICE_CLASS_100 # EU, US, Canada only
         )

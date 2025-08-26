@@ -85,7 +85,7 @@ def get_subdomain_mapping() -> Dict[str, list]:
     # Add more as needed in the future
     return {
         "construction": ["bau", "construction", "constructii"], # DE, EN, RO
-        "recruitment": ["rekrutierung", "recruitment", "recrutare"]
+        "recruitment": ["bewerben", "recruitment", "angajare"]
     }
 
 
