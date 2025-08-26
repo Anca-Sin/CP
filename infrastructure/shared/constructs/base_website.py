@@ -46,9 +46,9 @@ from aws_cdk import (
 # Basic building block of CDK
 from constructs import Construct
 
-# ---------------------------------
+# =================================
 # MY CUSTOM WEBSITE CONSTRUCT CLASS
-# ---------------------------------
+# =================================
 class RanjdarGroupWebsite(Construct):
     """
     L3 Construct for creating my website.
@@ -69,10 +69,36 @@ class RanjdarGroupWebsite(Construct):
         RanjdarGroupWebsite(self, "website", "construction", "ranjdar-group")
         """
         # Make class inherit all Construct features
-        super().__init__(scope, id, ++kwargs)
+        super().__init__(scope, id, **kwargs)
 
-        # ---------------------------------
-        # STEP 1: Create S3 Bucket
-        # ---------------------------------
+        # =================================
+        #     STEP 1: Create S3 Bucket
+        # =================================
+        self.bucket = s3.Bucket(
+            # f"{business_unit}-website-bucket" = the CDK ID for this bucket
+            self, f"{business_unit}-website-bucket",
 
+            # Bucket name that appears in AWS console, ex.: ranjdar-group-construction-website
+            # Must be globally unique across ALL AWS customers worldwide
+            bucket_name=f"{org_name}-{business_unit}-website",
 
+            # -------------------------------
+            # STATIC WEBSITE HOSTING SETTINGS
+            # S3 bucket = website, not just file storage
+
+            # When someone visits my domain, show this file:
+            website_index_document="index.html",
+
+            # When someone visits a page that doesn't exist, show this:
+            website_error_document="error.html",
+
+            # -------------------------------
+            # CLEANUP SETTINGS
+            # Removal.Policy.DESTROY = Delete the bucket
+            # Removal.Policy.RETAIN = Keep the bucket (use for production)
+            removal_policy=RemovalPolicy.DESTROY, # For dev only
+
+            # auto_delete_objects=True means del all files in the bucket when destroying
+            # Without this CDK can't delete non-empty buckets
+            auto_delete_objects=True # For dev only
+        )
