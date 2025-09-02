@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RanjdarGroup - Concrete Construction Specialist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            color: #e5e5e5;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .content {
+            padding: 40px 20px;
+        }
+        .services {
+            background: #1a1a2e;
+            color: #e5e5e5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 2px solid #fbbf24;
+        }
+        .contact-form {
+            background: #16213e;
+            padding: 30px;
+            border: 1px solid #1e3a8a;
+            border-radius: 8px;
+            max-width: 600px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #1e3a8a;
+            background: #0f172a;
+            color: #e5e5e5;
+            border-radius: 4px;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #fbbf24;
+            box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+        }
+        button {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #0a0a0a;
+            padding: 12px 30px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(251, 191, 36, 0.3);
+        }
+        .price-box {
+            background: #1a1a2e;
+            color: white;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            border-radius: 8px;
+            border: 2px solid #fbbf24;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 style="color: #fbbf24;">Ranjdar-Group Construction</h1>
+        <p>Transformer Station Concrete Specialist - Labor Only</p>
+    </div>
+
+    <div class="content">
+        <h2 style="text-align: center;">Professional Concrete Construction for Transformer Stations</h2>
+        <p style="text-align: center;">Specialized in high-quality concrete work for electrical infrastructure projects across Germany.</p>
+
+        <div class="price-box">
+            <h3>€880 per Housing (Labor Only)</h3>
+            <p>Capacity: 4 Units per Day | No Material Costs</p>
+        </div>
+
+        <div class="services">
+            <h2>Our Services</h2>
+            <ul>
+                <li><strong>Concrete Construction:</strong> Professional construction of 4.0m × 2.55m × 2.55m transformer housings</li>
+                <li><strong>Steel Reinforcement:</strong> Expert installation to your specifications</li>
+                <li><strong>Certified Welding:</strong> Structural connections by certified welders</li>
+            </ul>
+            <p><strong>Coverage Area:</strong> Salzgitter and surrounding regions</p>
+        </div>
+
+        <h2>Contact Form <span style="font-size: 14px; font-weight: normal;">(* mandatory fields)</span></h2>
+        <div class="contact-form">
+            <form id="contactForm">
+                <label>Contact Person *</label>
+                <input type="text" name="contact_person" required>
+
+                <label>Email *</label>
+                <input type="email" name="email" required>
+
+                <label>Phone *</label>
+                <input type="tel" name="phone" required>
+
+                <label>Company</label>
+                <input type="text" name="company">
+
+                <label>Project Type</label>
+                <select name="project_type">
+                    <option value="">Select...</option>
+                    <option value="transformer_station">Transformer Station</option>
+                    <option value="infrastructure">Electrical Infrastructure</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label>Units Needed</label>
+                <input type="number" name="units_needed" min="1">
+
+                <label>Timeline</label>
+                <input type="text" name="timeline" placeholder="e.g., Q1 2025">
+
+                <label>Message *</label>
+                <textarea name="message" rows="5" required></textarea>
+
+                <button type="submit">Submit Inquiry</button>
+            </form>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            // UPDATE THIS URL AFTER DEPLOYMENT
+                const response = await fetch(window.API_CONFIG.contactEndpoint, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                document.getElementById('result').innerHTML =
+                    '<p style="color:green">Thank you! We\'ll respond within 24 hours.</p>';
+                e.target.reset();
+            } else {
+                document.getElementById('result').innerHTML =
+                    '<p style="color:red">Error submitting form. Please try again.</p>';
+            }
+        } catch (error) {
+            document.getElementById('result').innerHTML =
+                '<p style="color:red">Connection error. Please try again.</p>';
+        }
+    });
+    </script>
+</body>
+</html>

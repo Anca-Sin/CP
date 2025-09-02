@@ -1,8 +1,8 @@
 """
 Shared Business Website Infrastructure Component (L3 CDK Construct)
 
-    After extensive research and planning, I've decided on a reusable website infrastructure pattern that can in the
-    future be used across multiple business units.
+    After extensive research and planning, I've decided on a reusable website infrastructure pattern that I can rely on
+    in the future for multiple business units.
     This design allows for
                     consistent deployment and scalable infrastructure for any potential business
                                                                         (construction - current, cosmetics, retail etc.)
@@ -22,10 +22,11 @@ Architecture Decision:
                     meeting the portfolio assignment (CDN, global distribution, IaC)
                     while building the infrastructure for a real future business group
 
-Anca Chiriac, August 25
-Cloud Programming Portfolio (DLBSEPCP01_E) + Real Business Infrastructure
+Anca Chiriac
+Cloud Programming_DLBSEPCP01_E_CF Portfolio
 """
 
+from typing import Any
 from aws_cdk import (
     # S3 = AWS's file storage service
     aws_s3 as s3,
@@ -45,10 +46,9 @@ from aws_cdk import (
 
 # Basic building block of CDK
 from constructs import Construct
+from aws_cdk import aws_s3_deployment as s3deploy
 
-# =================================
-# MY CUSTOM WEBSITE CONSTRUCT CLASS
-# =================================
+
 class RanjdarGroupWebsite(Construct):
     """
     L3 Construct for creating my website.
@@ -57,23 +57,23 @@ class RanjdarGroupWebsite(Construct):
     # L3 Construct = high-level, easy to use, lots of defaults set
     # (L1 = raw CloudFormation, L2 = basic CDK, L3 = my custom patterns)
 
-    def __init__(self, scope: Construct, id: str, business_unit: str, org_name: str, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, business_unit: str, org_name: str, **kwargs: Any) -> None:
         """
-        :param scope:           the CDK app or stack this belongs to (parent)
-        :param id:              unique for each specific instance
-        :param business_unit:   starting with construction
-        :param org_name:        "ranjdar-group"
-        :param kwargs:          other optional param
+        Args:
+            scope:           the CDK app or stack this belongs to (parent)
+            construct_id:    unique for each specific instance
+            business_unit:   starting with construction
+            org_name:        "ranjdar-group"
+            kwargs:          other optional param
 
         Example:
-        RanjdarGroupWebsite(self, "website", "construction", "ranjdar-group")
+            RanjdarGroupWebsite(self, "website", "construction", "ranjdar-group")
         """
         # Make class inherit all Construct features
-        super().__init__(scope, id, **kwargs)
+        super().__init__(scope, construct_id, **kwargs) # type: ignore
 
-        # ========================
         # STEP 1: Create S3 Bucket
-        # ========================
+        #--------------------------
         self.bucket = s3.Bucket(
             # f"{business_unit}-website-bucket" = the CDK ID for this bucket
             self, f"{business_unit}-website-bucket",
@@ -82,8 +82,8 @@ class RanjdarGroupWebsite(Construct):
             # Must be globally unique across ALL AWS customers worldwide
             bucket_name=f"{org_name}-{business_unit}-website",
 
-            # -------------------------------
             # STATIC WEBSITE HOSTING SETTINGS
+            #---------------------------------
             # S3 bucket = website, not just file storage
 
             # When someone visits my domain, show this file:
@@ -92,8 +92,19 @@ class RanjdarGroupWebsite(Construct):
             # When someone visits a page that doesn't exist, show this:
             website_error_document="error.html",
 
-            # -------------------------------
+            # S3 bucket must be publicly readable for website hosting
+            public_read_access=True,
+
+            # Allows public bucket policy needed for website hosting while blocking direct ACL modifications
+            block_public_access=s3.BlockPublicAccess(
+                block_public_acls=True,
+                ignore_public_acls=True,
+                block_public_policy=False, # must be False to allow public website
+                restrict_public_buckets=False # must be False for public access
+            ),
+
             # CLEANUP SETTINGS
+            #------------------
             # Removal.Policy.DESTROY = Delete the bucket
             # Removal.Policy.RETAIN = Keep the bucket (use for production)
             removal_policy=RemovalPolicy.DESTROY, # For dev only
@@ -103,9 +114,8 @@ class RanjdarGroupWebsite(Construct):
             auto_delete_objects=True # For dev only
         )
 
-        # =============================================
         # STEP 2: Create CLOUD FRONT DISTRIBUTION (CDN)
-        # =============================================
+        #-----------------------------------------------
         # CloudFront = Content Delivery Network
         #
         # - copies my website to multiple locations worldwide
@@ -123,7 +133,8 @@ class RanjdarGroupWebsite(Construct):
             default_behavior=cloudfront.BehaviorOptions(
                 # ORIGIN = where CloudFront gets the files
                 # S3Origin = get files from an S3 bucket
-                origin=origins.S3Origin(self.bucket) # Tells CloudFront to get files from my bucket above
+                # Tells CloudFront to get files from my bucket above
+                origin=origins.S3StaticWebsiteOrigin(self.bucket) # type: ignore
             ),
 
             # COMMENT = Description in my AWS Console
