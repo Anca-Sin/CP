@@ -21,6 +21,7 @@ def deploy_website(scope: Construct, business_unit: str, bucket, api_url: str) -
     # Deploy all website files including generated config
     s3deploy.BucketDeployment(
         scope, f"{business_unit}-website-deployment",
-        sources=[s3deploy.Source.asset(f"website/{business_unit}")],
+        # Currently adding EN else file doesn't end up at the root where S3 website hosting expects it
+        sources=[s3deploy.Source.asset(f"website/{business_unit}/en")],
         destination_bucket=bucket
     )
