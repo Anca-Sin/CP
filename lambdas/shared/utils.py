@@ -59,7 +59,7 @@ def create_cors_response(status_code: int, body: Dict[str, Any]) -> Dict[str, An
             # Allow only specific HTTP methods
             # OPTIONS = browser check if it can call the API
             # POST = actual request - my contact form data submission
-            "Access-Control-Allow-Methods": "OPTION, POST" # Don't need GET for project, will add later
+            "Access-Control-Allow-Methods": "OPTIONS, POST" # Don't need GET for project, will add later
         },
 
         # Convert Py dict to JSON str that browsers understand

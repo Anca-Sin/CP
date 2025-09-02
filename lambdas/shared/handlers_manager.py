@@ -11,8 +11,9 @@ from typing import Dict, Any
 # noinspection PyPackageRequirements
 import boto3
 
-from lambdas.construction.contact_handler_construction import dynamodb
 from lambdas.shared.utils import sanitize_input, determine_language_from_domain, create_cors_response
+
+dynamodb = boto3.resource("dynamodb")
 
 # Simple Email Service client
 # Handles all email operations through the Frankfurt region for GDPR (= General Data Protection Regulation)
