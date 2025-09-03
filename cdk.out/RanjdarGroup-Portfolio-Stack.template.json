@@ -1019,7 +1019,7 @@
      "cdk-hnb659fds-assets-669566832354-eu-central-1"
     ],
     "SourceObjectKeys": [
-     "9f592e64d3751c0113b1fa487c0efeb7cf4e5d765a87802c336442fd15f2ab1d.zip"
+     "6d8b88f70f1faeba3ec09a1ea26bfba28addd35451f1eca75d9aa08608f05e0b.zip"
     ],
     "DestinationBucketName": {
      "Ref": "constructionwebsiteconstructionwebsitebucketEB77BCE9"

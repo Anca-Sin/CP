@@ -5,6 +5,8 @@ Keeps everything consistent across all business units.
 
 from typing import Dict
 import os
+from constructs import Construct
+from aws_cdk import aws_s3_deployment as s3deploy
 
 
 def get_mandatory_tags(business_unit: str, country: str = "DE", environment: str = "dev") -> Dict[str, str]:
@@ -149,3 +151,23 @@ def generate_api_config(api_url: str, business_unit: str) -> None:
         # Write config - overwrites on each deployment (important for API URL updates)
         with open(path, 'w') as f:
             f.write(config)
+
+
+
+def deploy_bucket(scope: Construct, business_unit: str, bucket) -> None:
+    """
+    Deploys website files and generates API config for any business unit.
+    Called after API creation = when I have urls, not CDK tokens.
+
+    Args:
+        scope: CDK construct scope (the stack)
+        business_unit:
+        bucket: S3 bucket from website construct
+    """
+    # Deploy all website files including generated config
+    s3deploy.BucketDeployment(
+        scope, f"{business_unit}-website-deployment",
+        # Currently adding EN else file doesn't end up at the root where S3 website hosting expects it
+        sources=[s3deploy.Source.asset(f"website/{business_unit}/en")],
+        destination_bucket=bucket
+    )
