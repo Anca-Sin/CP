@@ -36,7 +36,6 @@ from constructs import Construct
 from infrastructure.shared.constructs.website_construct import RanjdarGroupWebsite
 from infrastructure.shared.managers.contact_form_infrastructure import create_contact_form_infrastructure
 from infrastructure.shared.config.constants import get_mandatory_tags, generate_api_config, deploy_bucket
-from infrastructure.shared.managers.deployment_manager import deploy_website
 
 
 class ContactConstructionStack(Stack):
