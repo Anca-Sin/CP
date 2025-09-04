@@ -61,31 +61,31 @@
         }
       }
     },
-    "6d8b88f70f1faeba3ec09a1ea26bfba28addd35451f1eca75d9aa08608f05e0b": {
+    "2fa83f301fe8886bfe298961900d651985cfc326e23080f1304b9c1c03edab1f": {
       "displayName": "construction-website-deployment/Asset1",
       "source": {
-        "path": "asset.6d8b88f70f1faeba3ec09a1ea26bfba28addd35451f1eca75d9aa08608f05e0b",
+        "path": "asset.2fa83f301fe8886bfe298961900d651985cfc326e23080f1304b9c1c03edab1f",
         "packaging": "zip"
       },
       "destinations": {
-        "669566832354-eu-central-1-318d3975": {
+        "669566832354-eu-central-1-a989b7e7": {
           "bucketName": "cdk-hnb659fds-assets-669566832354-eu-central-1",
-          "objectKey": "6d8b88f70f1faeba3ec09a1ea26bfba28addd35451f1eca75d9aa08608f05e0b.zip",
+          "objectKey": "2fa83f301fe8886bfe298961900d651985cfc326e23080f1304b9c1c03edab1f.zip",
           "region": "eu-central-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::669566832354:role/cdk-hnb659fds-file-publishing-role-669566832354-eu-central-1"
         }
       }
     },
-    "dde3fb2d5c8d3a6f3aa26bd6439324b2acb32d5f1c024f2ba6f5056299a713e2": {
+    "051f4b687161252aaf6887a52f4fcfaf80770934d60a8cfe4d60eb1f2cbc0f7b": {
       "displayName": "RanjdarGroup-Portfolio-Stack Template",
       "source": {
         "path": "RanjdarGroup-Portfolio-Stack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "669566832354-eu-central-1-3a812c52": {
+        "669566832354-eu-central-1-b5c6b196": {
           "bucketName": "cdk-hnb659fds-assets-669566832354-eu-central-1",
-          "objectKey": "dde3fb2d5c8d3a6f3aa26bd6439324b2acb32d5f1c024f2ba6f5056299a713e2.json",
+          "objectKey": "051f4b687161252aaf6887a52f4fcfaf80770934d60a8cfe4d60eb1f2cbc0f7b.json",
           "region": "eu-central-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::669566832354:role/cdk-hnb659fds-file-publishing-role-669566832354-eu-central-1"
         }
