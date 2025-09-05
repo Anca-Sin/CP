@@ -35,7 +35,7 @@ from aws_cdk import (
 from constructs import Construct
 from infrastructure.shared.constructs.website_construct import RanjdarGroupWebsite
 from infrastructure.shared.managers.contact_form_infrastructure import create_contact_form_infrastructure
-from infrastructure.shared.config.constants import get_mandatory_tags, generate_api_config, deploy_bucket
+from infrastructure.shared.config.constants import get_mandatory_tags, deploy_website
 
 
 class ContactConstructionStack(Stack):
@@ -71,10 +71,7 @@ class ContactConstructionStack(Stack):
         self.api = contact_infra["api"]
 
         # Generate config with resolved URL
-        generate_api_config(self.api.url, "construction")
-
-        # Deploy files
-        deploy_bucket(self, "construction", self.website.bucket)
+        deploy_website(self, "construction", self.website.bucket, self.api.url)
 
         # TAGS FOR COST TRACKING
         #------------------------

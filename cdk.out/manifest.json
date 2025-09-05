@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::669566832354:role/cdk-hnb659fds-deploy-role-669566832354-eu-central-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::669566832354:role/cdk-hnb659fds-cfn-exec-role-669566832354-eu-central-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-669566832354-eu-central-1/051f4b687161252aaf6887a52f4fcfaf80770934d60a8cfe4d60eb1f2cbc0f7b.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-669566832354-eu-central-1/489607b5d0c676a879666db671b220224fbc856c564a56ebb574971a29e2822b.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -686,19 +686,19 @@
             "data": "constructionapiv1contactPOST0720C557"
           }
         ],
-        "/RanjdarGroup-Portfolio-Stack/construction-website-deployment/AwsCliLayer": [
+        "/RanjdarGroup-Portfolio-Stack/construction-deployment/AwsCliLayer": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": {}
           }
         ],
-        "/RanjdarGroup-Portfolio-Stack/construction-website-deployment/AwsCliLayer/Resource": [
+        "/RanjdarGroup-Portfolio-Stack/construction-deployment/AwsCliLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "constructionwebsitedeploymentAwsCliLayerB29EA67E"
+            "data": "constructiondeploymentAwsCliLayer889D0CAB"
           }
         ],
-        "/RanjdarGroup-Portfolio-Stack/construction-website-deployment/CustomResourceHandler": [
+        "/RanjdarGroup-Portfolio-Stack/construction-deployment/CustomResourceHandler": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": {
@@ -740,16 +740,16 @@
             }
           }
         ],
-        "/RanjdarGroup-Portfolio-Stack/construction-website-deployment/CustomResource": [
+        "/RanjdarGroup-Portfolio-Stack/construction-deployment/CustomResource": [
           {
             "type": "aws:cdk:analytics:construct",
             "data": "*"
           }
         ],
-        "/RanjdarGroup-Portfolio-Stack/construction-website-deployment/CustomResource/Default": [
+        "/RanjdarGroup-Portfolio-Stack/construction-deployment/CustomResource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "constructionwebsitedeploymentCustomResource051B258A"
+            "data": "constructiondeploymentCustomResource22B0D708"
           }
         ],
         "/RanjdarGroup-Portfolio-Stack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C": [
@@ -845,6 +845,30 @@
                 {}
               ]
             }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
           }
         ],
         "/RanjdarGroup-Portfolio-Stack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/ImportServiceRole": [
@@ -877,6 +901,30 @@
             "data": {
               "attachToRole": [
                 "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
               ]
             }
           },

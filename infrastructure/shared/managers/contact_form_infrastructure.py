@@ -72,10 +72,10 @@ def create_contact_form_infrastructure(scope: Construct, business_unit: str) -> 
         runtime=lambda_.Runtime.PYTHON_3_12,
 
         # Function to call in my Python file
-        handler=f"{business_unit}_contact_handler.{business_unit}_contact_handler",
+        handler=f"contact_handler_{business_unit}.construction_contact_handler",
 
         # Where to find the code
-        code=lambda_.Code.from_asset(f"lambdas/{business_unit}"),
+        code=lambda_.Code.from_asset("lambdas"),
 
         # Environment variables Lambda can access
         environment={
