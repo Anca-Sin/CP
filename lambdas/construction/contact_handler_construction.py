@@ -8,7 +8,7 @@ from typing import Dict, Any
 # noinspection PyPackageRequirements
 import boto3
 
-from lambdas.shared.handlers_manager import process_contact_form_submission
+from shared.handlers_manager import process_contact_form_submission
 
 # AWS client for DynamoDB
 dynamodb = boto3.resource("dynamodb")
@@ -31,7 +31,7 @@ ENVIRONMENT = os.environ.get("ENVIRONMENT")
 
 
 # event + context = Lambda required signature param (like __init__(self))
-def construction_contact_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
+def contact_handler_construction(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     """
     Processes construction contact form submission.
 

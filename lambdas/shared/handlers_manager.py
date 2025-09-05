@@ -11,7 +11,7 @@ from typing import Dict, Any
 # noinspection PyPackageRequirements
 import boto3
 
-from lambdas.shared.utils import sanitize_input, determine_language_from_domain, create_cors_response
+from shared.utils import sanitize_input, determine_language_from_domain, create_cors_response
 
 dynamodb = boto3.resource("dynamodb")
 
